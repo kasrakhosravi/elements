@@ -30,6 +30,23 @@ let FilterRecursive = (validFn, [head, ...tail]) => {
   return[...FilterRecursive(validFn, tail)];
 };
 
+// Prototype version of Filter for Arrays
+Array.prototype.filter = function(validator) {
+  const items = this;
+  const result = [];
+
+  for (var i = 0; i < items.length; i++) {
+    var item = items[0];
+
+    if (validator(item)) {
+      result.push(item);
+    }
+  }
+
+  return result;
+}
+
 // Execution
 console.log(FilterLoop(isEven, items));
 console.log(FilterRecursive(isEven, items));
+console.log(items.filter(isEven));

@@ -29,6 +29,25 @@ let MapRecursive = (fn, [head, ...tail]) => {
   return[fn(head), ...MapRecursive(fn, tail)];
 };
 
+// Prototype version of Map for Arrays
+Array.prototype.map = function(mapper) {
+  var items = this;
+  var result = [];
+
+  if (typeof mapper !== 'function') {
+    throw new TypeError(mapper, ' is not a function');
+  }
+
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var mappedItem = mapper(item, i , items);
+    result.push(item);
+  }
+
+  return result;
+};
+
 // Execution
 console.log(MapLoop(double, items));
 console.log(MapRecursive(double, items));
+console.log(items.map(double));

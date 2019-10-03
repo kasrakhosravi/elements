@@ -29,6 +29,12 @@ let MapRecursive = (fn, [head, ...tail]) => {
   return[fn(head), ...MapRecursive(fn, tail)];
 };
 
+let MapGenerator = function * (fn, arr) {
+  for (let x of arr) {
+    yield fn(x);
+  }
+};
+
 // Prototype version of Map for Arrays
 Array.prototype.map = function(mapper) {
   var items = this;
@@ -50,4 +56,5 @@ Array.prototype.map = function(mapper) {
 // Execution
 console.log(MapLoop(double, items));
 console.log(MapRecursive(double, items));
+console.log(MapGenerator(double, items));
 console.log(items.map(double));
